@@ -1,0 +1,34 @@
+# Ignore Visual Studio temporary files, build results, and
+# debug/release directories
+*.obj
+*.exe
+*.ilk
+*.idb
+*.pdb
+*.log
+*.tlog
+*.lastbuildstate
+*.user
+*.filters
+*.VC.db
+*.VC.opendb
+*.recipe
+**/*.dll
+
+# Ignore x64 build folders
+/x64/
+/Debug/
+/Release/
+.vs
+
+# Ignore SFML binary files
+/sfml/bin/
+/sfml/Debug/
+/sfml/Release/
+sfml
+
+# Ignore generated build files
+*.suo
+*.cache
+*.directory
+
