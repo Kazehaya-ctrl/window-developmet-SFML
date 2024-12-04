@@ -18,6 +18,7 @@ private:
 	std::vector<sf::RectangleShape> enemies;
 	sf::RectangleShape enemy;
 	sf::Vector2i mouse;
+	sf::Vector2f mousePos;
 
 	int points;
 	float enemySpawnTimer;

@@ -5,7 +5,7 @@ void Game::initVariable()
 	this->window = nullptr;
 
 	this->points = 0;
-	this->enemySpawnTimerMax = 1000.f;
+	this->enemySpawnTimerMax = 100.f;
 	this->enemySpawnTimer = this->enemySpawnTimerMax;
 	this->maxEnemies = 10;
 }
@@ -73,13 +73,25 @@ void Game::update_enemies()
 			this->enemySpawnTimer = 0.f;
 		}
 		else {
-			this->enemySpawnTimer += 1.f;
+			this->enemySpawnTimer += 10.f;
 		}
 	}	
 
-	for (auto& a : this->enemies) {
-		a.move(0.f, 1.f);
+	for (int i = this->enemies.size() - 1; i >= 0; i--) {
+			this->enemies[i].move(0.f, 10.f);
+
+			if (this->event.mouseButton.button == sf::Mouse::Left) {
+				if (this->enemies[i].getGlobalBounds().contains(mousePos)) {
+						this->enemies.erase(this->enemies.begin() + i);
+						continue;
+				}
+			}
+
+			if (this->enemies[i].getPosition().y > this->window->getSize().y) {
+					this->enemies.erase(this->enemies.begin() + i);
+			}
 	}
+
 }
 
 void Game::render_enemies()
@@ -93,12 +105,13 @@ void Game::update()
 {	
 	this->event_polling();
 	this->update_mouse_position();
-	this->update_enemies();
+	this->update_enemies();	
 }
 
 void Game::update_mouse_position ()
 {
 	this->mouse = sf::Mouse::getPosition(*this->window);
+	this->mousePos = this->window->mapPixelToCoords(this->mouse);
 }
 
 void Game::render()
